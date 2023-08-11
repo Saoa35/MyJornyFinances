@@ -22,7 +22,7 @@ export const EmptyList = () => {
   return (
     <ListContainer>
       <ListImage source={require('../assets/images/empty.png')} />
-      <ListText>No added trips yet</ListText>
+      <ListText>You haven't added anything here yet</ListText>
     </ListContainer>
   );
 };
