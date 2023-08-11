@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, Image, View, TextInput, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {ScreenWrapper} from './HomeScreen';
@@ -88,6 +88,9 @@ const AddTripText = styled.Text`
 `;
 
 export const AddTripScreen = () => {
+  const [place, setPlace] = useState('');
+  const [country, setCountry] = useState('');
+
   return (
     <ScreenWrapper>
       <AddTripWrapper>
@@ -100,7 +103,7 @@ export const AddTripScreen = () => {
             <AddTripImage source={require('../assets/images/4.png')} />
           </ImageWrapper>
           <TextInputWrapper>
-            <DirectionText>Wich Continent ?</DirectionText>
+            <DirectionText>Wich Place ?</DirectionText>
             <ContinentTextInput />
             <DirectionText>Which Country ?</DirectionText>
             <CountryTextInput />
