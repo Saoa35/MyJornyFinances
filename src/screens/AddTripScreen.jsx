@@ -17,13 +17,7 @@ const AddTripContainer = styled.View`
   margin-top: 20px;
 `;
 
-const ButtonWrapper = styled.View`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const AddTripTitle = styled.Text`
+export const AddTripTitle = styled.Text`
   color: ${colors.heading};
   font-size: 22px;
   line-height: 28px;
@@ -106,9 +100,7 @@ export const AddTripScreen = () => {
     <ScreenWrapper>
       <AddTripWrapper>
         <AddTripContainer>
-          {/* <ButtonWrapper> */}
           <BackButton />
-          {/* </ButtonWrapper> */}
           <AddTripTitle>Add Trip</AddTripTitle>
           <ImageWrapper>
             <AddTripImage source={require('../assets/images/4.png')} />

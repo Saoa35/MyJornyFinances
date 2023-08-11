@@ -10,7 +10,7 @@ export const ScreenWrapper = styled.View`
   height: 100%;
 `;
 
-const MainContainer = styled.View`
+export const MainContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -24,14 +24,14 @@ const Title = styled.Text`
   line-height: 36px;
 `;
 
-const TouchableFrame = styled.TouchableOpacity`
+export const TouchableFrame = styled.TouchableOpacity`
   padding: 8px 12px;
   border: 1px solid rgb(229 231 235);
   background-color: white;
   border-radius: 20px;
 `;
 
-const LogoView = styled.View`
+export const LogoView = styled.View`
   justify-content: center;
   align-items: center;
   background-color: rgb(191 219 254);
@@ -39,20 +39,20 @@ const LogoView = styled.View`
   margin: 16px;
 `;
 
-const TripsInfo = styled.View`
+export const TripsInfo = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
 
-const Recent = styled.Text`
+export const Recent = styled.Text`
   color: ${colors.heading};
   font-weight: bold;
   font-size: 20px;
   line-height: 28px;
 `;
 
-const CardsContainer = styled.View`
+export const CardsContainer = styled.View`
   margin: 16px 0;
   height: 430px;
 `;

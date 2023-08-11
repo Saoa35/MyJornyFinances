@@ -6,6 +6,7 @@ import {colors} from '../theme';
 import {items} from '../data/items';
 import randomImage from '../assets/images/randomImage';
 import {EmptyList} from './EmptyList';
+import {useNavigation} from '@react-navigation/native';
 
 const CardsContainer = styled.TouchableOpacity`
   background-color: white;
@@ -16,6 +17,8 @@ const CardsContainer = styled.TouchableOpacity`
 `;
 
 export const CardItems = () => {
+  const navigation = useNavigation();
+
   return (
     <FlatList
       data={items}
@@ -28,7 +31,7 @@ export const CardItems = () => {
       }}
       renderItem={({item}) => {
         return (
-          <CardsContainer>
+          <CardsContainer onPress={() => navigation.navigate('TripFinances')}>
             <View>
               <Image source={randomImage()} style={{width: 144, height: 144}} />
               <Text style={{color: colors.heading, fontWeight: 'bold'}}>
