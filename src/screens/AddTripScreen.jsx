@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import {ScreenWrapper} from './HomeScreen';
 import {colors} from '../theme';
 import {BackButton} from '../components/buttons/BackButton';
+import {useNavigation} from '@react-navigation/native';
 
 const AddTripWrapper = styled.View`
   justify-content: space-between;
@@ -91,6 +92,16 @@ export const AddTripScreen = () => {
   const [place, setPlace] = useState('');
   const [country, setCountry] = useState('');
 
+  const navigation = useNavigation();
+
+  const handleAddTrip = () => {
+    if (place && country) {
+      navigation.navigate('Home');
+    } else {
+      console.log('Text fields must be filled');
+    }
+  };
+
   return (
     <ScreenWrapper>
       <AddTripWrapper>
@@ -104,14 +115,20 @@ export const AddTripScreen = () => {
           </ImageWrapper>
           <TextInputWrapper>
             <DirectionText>Wich Place ?</DirectionText>
-            <ContinentTextInput />
+            <ContinentTextInput
+              value={place}
+              onChangeText={value => setPlace(value)}
+            />
             <DirectionText>Which Country ?</DirectionText>
-            <CountryTextInput />
+            <CountryTextInput
+              value={country}
+              onChangeText={value => setCountry(value)}
+            />
           </TextInputWrapper>
         </AddTripContainer>
 
         <View>
-          <AddTripOpacity>
+          <AddTripOpacity onPress={handleAddTrip}>
             <AddTripText>Add Trip</AddTripText>
           </AddTripOpacity>
         </View>
