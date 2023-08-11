@@ -3,8 +3,9 @@ import {Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../theme';
 import {CardItems} from '../components/CardItems';
+import {useNavigation} from '@react-navigation/native';
 
-const HomeScreenWrapper = styled.View`
+export const ScreenWrapper = styled.View`
   width: 100%;
   height: 100%;
 `;
@@ -57,8 +58,10 @@ const CardsContainer = styled.View`
 `;
 
 function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <HomeScreenWrapper>
+    <ScreenWrapper>
       <MainContainer>
         <Title>My Jorney Finances</Title>
         <TouchableFrame>
@@ -75,7 +78,7 @@ function HomeScreen() {
         <View style={{paddingHorizontal: 16}}>
           <TripsInfo>
             <Recent>Recent Trips</Recent>
-            <TouchableFrame>
+            <TouchableFrame onPress={() => navigation.navigate('AddTrip')}>
               <Text style={{color: colors.heading}}>Add Trip</Text>
             </TouchableFrame>
           </TripsInfo>
@@ -84,7 +87,7 @@ function HomeScreen() {
           </CardsContainer>
         </View>
       </ScrollView>
-    </HomeScreenWrapper>
+    </ScreenWrapper>
   );
 }
 
