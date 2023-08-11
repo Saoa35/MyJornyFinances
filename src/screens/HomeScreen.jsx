@@ -51,6 +51,11 @@ const Recent = styled.Text`
   line-height: 28px;
 `;
 
+const CardsContainer = styled.View`
+  margin: 16px 0;
+  height: 430px;
+`;
+
 function HomeScreen() {
   return (
     <HomeScreenWrapper>
@@ -74,9 +79,9 @@ function HomeScreen() {
               <Text style={{color: colors.heading}}>Add Trip</Text>
             </TouchableFrame>
           </TripsInfo>
-          <View style={{marginVertical: 16, height: 430}}>
+          <CardsContainer>
             <CardItems />
-          </View>
+          </CardsContainer>
         </View>
       </ScrollView>
     </HomeScreenWrapper>

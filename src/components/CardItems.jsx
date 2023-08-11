@@ -12,13 +12,13 @@ const CardsContainer = styled.TouchableOpacity`
   padding: 12px;
   border-radius: 15px;
   margin-bottom: 12px;
-  box-shadow: 1px 2px rgba(0 0 0 / 0.05);
+  box-shadow: 1px 2px rgba(0, 0, 0, 0.05);
 `;
 
 export const CardItems = () => {
   return (
     <FlatList
-      data={[]}
+      data={items}
       numColumns={2}
       ListEmptyComponent={<EmptyList />}
       keyExtractor={item => item.id}
