@@ -1,7 +1,8 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
-import styled from 'styled-components/native';
+import {Text, View, Image, ScrollView} from 'react-native';
 import {colors} from '../theme';
+import styled from 'styled-components/native';
+
 import {useNavigation} from '@react-navigation/native';
 import {
   CardsContainer,
@@ -13,19 +14,36 @@ import {
   TripsInfo,
 } from './HomeScreen';
 import {BackButton} from '../components/buttons/BackButton';
-import {AddTripTitle} from './AddTripScreen';
 import {CostsCart} from '../components/CostsCart';
 
-function TripFinancesScreen() {
+const TripPlaceTitle = styled.Text`
+  color: ${colors.heading};
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 42%;
+`;
+
+const TripCountryTitle = styled.Text`
+  color: ${colors.heading};
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 13%;
+`;
+
+function TripFinancesScreen(props) {
   const navigation = useNavigation();
+  console.log('props : ', props);
 
   return (
     <ScreenWrapper>
       <MainContainer>
         <BackButton />
-        <AddTripTitle style={{marginTop: 15, marginLeft: '3%'}}>
-          Add Trip
-        </AddTripTitle>
+        <View>
+          <TripPlaceTitle>trip place</TripPlaceTitle>
+          <TripCountryTitle>trip country</TripCountryTitle>
+        </View>
       </MainContainer>
       <LogoView style={{backgroundColor: 'none'}}>
         <Image

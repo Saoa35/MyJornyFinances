@@ -31,7 +31,8 @@ export const CardItems = () => {
       }}
       renderItem={({item}) => {
         return (
-          <CardsContainer onPress={() => navigation.navigate('TripFinances')}>
+          <CardsContainer
+            onPress={() => navigation.navigate('TripFinances', {...item})}>
             <View>
               <Image source={randomImage()} style={{width: 144, height: 144}} />
               <Text style={{color: colors.heading, fontWeight: 'bold'}}>
