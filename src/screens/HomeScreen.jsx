@@ -66,19 +66,19 @@ function HomeScreen() {
           style={{width: 300, height: 300}}
         />
       </LogoView>
-      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-      <View style={{paddingHorizontal: 16, width: '100%', height: '100%'}}>
-        <TripsInfo>
-          <Recent>Recent Trips</Recent>
-          <TouchableFrame>
-            <Text style={{color: colors.heading}}>Add Trip</Text>
-          </TouchableFrame>
-        </TripsInfo>
-        <View style={{marginVertical: 16, width: '100%', height: '100%'}}>
-          <CardItems />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{paddingHorizontal: 16}}>
+          <TripsInfo>
+            <Recent>Recent Trips</Recent>
+            <TouchableFrame>
+              <Text style={{color: colors.heading}}>Add Trip</Text>
+            </TouchableFrame>
+          </TripsInfo>
+          <View style={{marginVertical: 16, height: 430}}>
+            <CardItems />
+          </View>
         </View>
-      </View>
-      {/* </ScrollView> */}
+      </ScrollView>
     </HomeScreenWrapper>
   );
 }

@@ -4,6 +4,7 @@ import {Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../theme';
 import {items} from '../data/items';
+import randomImage from '../assets/images/randomImage';
 
 const CardsContainer = styled.TouchableOpacity`
   background-color: white;
@@ -27,10 +28,7 @@ export const CardItems = () => {
         return (
           <CardsContainer>
             <View>
-              <Image
-                source={require('../assets/images/1.png')}
-                style={{width: 144, height: 144}}
-              />
+              <Image source={randomImage()} style={{width: 144, height: 144}} />
               <Text style={{color: colors.heading, fontWeight: 'bold'}}>
                 {item.place}
               </Text>
