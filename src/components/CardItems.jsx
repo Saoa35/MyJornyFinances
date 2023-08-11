@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import {colors} from '../theme';
 import {items} from '../data/items';
 import randomImage from '../assets/images/randomImage';
+import {EmptyList} from './EmptyList';
 
 const CardsContainer = styled.TouchableOpacity`
   background-color: white;
@@ -17,8 +18,9 @@ const CardsContainer = styled.TouchableOpacity`
 export const CardItems = () => {
   return (
     <FlatList
-      data={items}
+      data={[]}
       numColumns={2}
+      ListEmptyComponent={<EmptyList />}
       keyExtractor={item => item.id}
       showsVerticalScrollIndicator={false}
       columnWrapperStyle={{
