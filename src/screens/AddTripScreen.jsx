@@ -113,7 +113,7 @@ export const AddTripScreen = () => {
             <AddTripImage source={require('../assets/images/4.png')} />
           </ImageWrapper>
           <TextInputWrapper>
-            <DirectionText>Wich Place ?</DirectionText>
+            <DirectionText>Which Place ?</DirectionText>
 
             <InputText value={place} onChangeText={value => setPlace(value)} />
             <DirectionText>Which Country ?</DirectionText>

@@ -30,6 +30,18 @@ const CategoryTitle = styled.Text`
   color: ${colors.heading};
 `;
 
+const CategoriesWrapper = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+const CategoryType = styled.TouchableOpacity`
+  border-radius: 9999px;
+  padding: 12px 16px;
+  margin: 0 8px 8px 0;
+`;
+
 export const AddFinanceScreen = () => {
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
@@ -56,7 +68,9 @@ export const AddFinanceScreen = () => {
           <AddTripTitle>Add Finances</AddTripTitle>
 
           <ImageWrapper>
-            <AddTripImage source={require('../assets/images/4.png')} />
+            <AddTripImage
+              source={require('../assets/images/expenseBanner.png')}
+            />
           </ImageWrapper>
 
           <TextInputWrapper>
@@ -71,15 +85,22 @@ export const AddFinanceScreen = () => {
 
           <CategoryesContainer>
             <CategoryTitle>Categories</CategoryTitle>
-            <View>
-              {categories.map(category => {
+            <CategoriesWrapper>
+              {categories.map(categ => {
+                let bgColor = 'white';
+                if (categ.value === category) {
+                  bgColor = 'rgb(187, 247, 208)';
+                }
                 return (
-                  <TouchableOpacity>
-                    <Text>{category.title}</Text>
-                  </TouchableOpacity>
+                  <CategoryType
+                    key={categ.value}
+                    onPress={() => setCategory(categ.value)}
+                    style={{backgroundColor: bgColor}}>
+                    <Text>{categ.title}</Text>
+                  </CategoryType>
                 );
               })}
-            </View>
+            </CategoriesWrapper>
           </CategoryesContainer>
         </AddTripContainer>
 
