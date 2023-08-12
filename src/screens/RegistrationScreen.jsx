@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {ScreenWrapper} from './HomeScreen';
-import styled from 'styled-components/native';
 import {
   AddTripContainer,
   AddTripImage,
