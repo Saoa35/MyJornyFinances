@@ -51,8 +51,6 @@ export const AddFinanceScreen = () => {
 
   const handleAddFinance = () => {
     if (title && amount && category) {
-      console.log(title, amount, category);
-
       navigation.goBack();
     } else {
       console.log('All text fields must be filled');
