@@ -7,6 +7,7 @@ import {AddTripScreen} from './src/screens/AddTripScreen';
 import {AddFinanceScreen} from './src/screens/AddFinanceScreen';
 import TripFinancesScreen from './src/screens/TripFinancesScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
+import RegistrationScreen from './src/screens/RegistrationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +17,16 @@ function App() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          options={{presentation: 'modal'}}
+          name="Login"
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          options={{presentation: 'modal'}}
+          name="Register"
+          component={RegistrationScreen}
+        />
         <Stack.Screen name="AddTrip" component={AddTripScreen} />
         <Stack.Screen name="AddFinance" component={AddFinanceScreen} />
         <Stack.Screen name="TripFinances" component={TripFinancesScreen} />

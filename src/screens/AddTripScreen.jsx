@@ -53,20 +53,6 @@ export const TextInputWrapper = styled.View`
   margin: 8px 8px 0 8px;
 `;
 
-// const ContinentTextInput = styled.TextInput`
-//   padding: 10px 20px;
-//   background-color: white;
-//   border-radius: 9999px;
-//   margin-bottom: 12px;
-// `;
-
-// const CountryTextInput = styled.TextInput`
-//   padding: 10px 20px;
-//   background-color: white;
-//   border-radius: 9999px;
-//   margin-bottom: 12px;
-// `;
-
 export const InputText = styled.TextInput`
   padding: 10px 20px;
   background-color: white;
@@ -121,16 +107,6 @@ export const AddTripScreen = () => {
               value={country}
               onChangeText={value => setCountry(value)}
             />
-
-            {/* <ContinentTextInput
-              value={place}
-              onChangeText={value => setPlace(value)}
-            />
-            <DirectionText>Which Country ?</DirectionText>
-            <CountryTextInput
-              value={country}
-              onChangeText={value => setCountry(value)}
-            /> */}
           </TextInputWrapper>
         </AddTripContainer>
 
