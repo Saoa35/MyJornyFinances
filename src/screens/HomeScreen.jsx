@@ -64,8 +64,8 @@ function HomeScreen() {
     <ScreenWrapper>
       <MainContainer>
         <Title>My Jorney Finances</Title>
-        <TouchableFrame>
-          <Text style={{color: colors.heading}}>Logout</Text>
+        <TouchableFrame onPress={() => navigation.navigate('Welcome')}>
+          <Text style={{color: colors.heading}}>LogOut</Text>
         </TouchableFrame>
       </MainContainer>
       <LogoView>
