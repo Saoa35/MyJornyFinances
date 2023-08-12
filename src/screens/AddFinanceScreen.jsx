@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, Image, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
 import {ScreenWrapper} from './HomeScreen';
 import {colors} from '../theme';
@@ -17,6 +17,18 @@ import {
   InputText,
   TextInputWrapper,
 } from './AddTripScreen';
+import {categories} from '../data/categories';
+
+const CategoryesContainer = styled.View`
+  margin-left: 25px;
+`;
+
+const CategoryTitle = styled.Text`
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  color: ${colors.heading};
+`;
 
 export const AddFinanceScreen = () => {
   const [title, setTitle] = useState('');
@@ -40,10 +52,13 @@ export const AddFinanceScreen = () => {
       <AddTripWrapper>
         <AddTripContainer>
           <BackButton />
+
           <AddTripTitle>Add Finances</AddTripTitle>
+
           <ImageWrapper>
             <AddTripImage source={require('../assets/images/4.png')} />
           </ImageWrapper>
+
           <TextInputWrapper>
             <DirectionText>Purpose of Spending ?</DirectionText>
             <InputText value={title} onChangeText={value => setTitle(value)} />
@@ -53,6 +68,19 @@ export const AddFinanceScreen = () => {
               onChangeText={value => setAmount(value)}
             />
           </TextInputWrapper>
+
+          <CategoryesContainer>
+            <CategoryTitle>Categories</CategoryTitle>
+            <View>
+              {categories.map(category => {
+                return (
+                  <TouchableOpacity>
+                    <Text>{category.title}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </CategoryesContainer>
         </AddTripContainer>
 
         <View>
