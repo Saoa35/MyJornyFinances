@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {ScreenWrapper} from './HomeScreen';
+import styled from 'styled-components/native';
 import {
   AddTripContainer,
   AddTripImage,
@@ -16,14 +17,19 @@ import {
 import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
 
+const ForgetPassContainer = styled.TouchableOpacity`
+  justify-content: flex-end;
+  flex-direction: row;
+`;
+
 function LoginScreen() {
-  const [place, setPlace] = useState('');
-  const [country, setCountry] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, sePassword] = useState('');
 
   const navigation = useNavigation();
 
-  const handleAddTrip = () => {
-    if (place && country) {
+  const handleSubmit = () => {
+    if (email && password) {
       navigation.navigate('Home');
     } else {
       console.log('All text fields must be filled');
@@ -37,23 +43,30 @@ function LoginScreen() {
           <BackButton />
           <AddTripTitle>Sign In</AddTripTitle>
           <ImageWrapper>
-            <AddTripImage source={require('../assets/images/4.png')} />
+            <AddTripImage
+              style={{height: 320, width: 320}}
+              source={require('../assets/images/login.png')}
+            />
           </ImageWrapper>
+
           <TextInputWrapper>
             <DirectionText>Email</DirectionText>
-
-            <InputText value={place} onChangeText={value => setPlace(value)} />
+            <InputText value={email} onChangeText={value => setEmail(value)} />
             <DirectionText>Password</DirectionText>
             <InputText
-              value={country}
-              onChangeText={value => setCountry(value)}
+              value={password}
+              secureTextEntry
+              onChangeText={value => sePassword(value)}
             />
+            <ForgetPassContainer>
+              <Text>Forget Password?</Text>
+            </ForgetPassContainer>
           </TextInputWrapper>
         </AddTripContainer>
 
         <View>
-          <AddTripOpacity onPress={handleAddTrip}>
-            <AddTripText>Add Trip</AddTripText>
+          <AddTripOpacity onPress={handleSubmit}>
+            <AddTripText>Log In</AddTripText>
           </AddTripOpacity>
         </View>
       </AddTripWrapper>
