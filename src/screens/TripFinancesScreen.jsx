@@ -22,27 +22,28 @@ const TripPlaceTitle = styled.Text`
   line-height: 30px;
   font-weight: bold;
   text-align: center;
-  margin-right: 42%;
+  margin-right: 50%;
 `;
 
 const TripCountryTitle = styled.Text`
   color: ${colors.heading};
   font-size: 16px;
   line-height: 24px;
-  margin-left: 13%;
+  margin-left: 18%;
 `;
 
 function TripFinancesScreen(props) {
   const navigation = useNavigation();
-  console.log('props : ', props);
+
+  const {id, place, country} = props.route.params;
 
   return (
     <ScreenWrapper>
       <MainContainer>
         <BackButton />
         <View>
-          <TripPlaceTitle>trip place</TripPlaceTitle>
-          <TripCountryTitle>trip country</TripCountryTitle>
+          <TripPlaceTitle>{place}</TripPlaceTitle>
+          <TripCountryTitle>{country}</TripCountryTitle>
         </View>
       </MainContainer>
       <LogoView style={{backgroundColor: 'none'}}>
@@ -55,10 +56,11 @@ function TripFinancesScreen(props) {
         <View style={{paddingHorizontal: 16}}>
           <TripsInfo>
             <Recent>Finances</Recent>
-            <TouchableFrame onPress={() => navigation.navigate('AddTrip')}>
+            <TouchableFrame onPress={() => navigation.navigate('AddFinance')}>
               <Text style={{color: colors.heading}}>Add Costs</Text>
             </TouchableFrame>
           </TripsInfo>
+
           <CardsContainer>
             <CostsCart />
           </CardsContainer>

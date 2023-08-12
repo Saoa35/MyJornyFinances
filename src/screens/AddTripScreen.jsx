@@ -6,13 +6,13 @@ import {colors} from '../theme';
 import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
 
-const AddTripWrapper = styled.View`
+export const AddTripWrapper = styled.View`
   justify-content: space-between;
   height: 100%;
   margin: 0 20px;
 `;
 
-const AddTripContainer = styled.View`
+export const AddTripContainer = styled.View`
   position: relative;
   margin-top: 20px;
 `;
@@ -28,19 +28,19 @@ export const AddTripTitle = styled.Text`
   left: 38%;
 `;
 
-const AddTripImage = styled.Image`
+export const AddTripImage = styled.Image`
   height: 288px;
   width: 288px;
 `;
 
-const ImageWrapper = styled.View`
+export const ImageWrapper = styled.View`
   flex-direction: row;
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 12px;
 `;
 
-const DirectionText = styled.Text`
+export const DirectionText = styled.Text`
   color: ${colors.heading};
   font-size: 18px;
   line-height: 28px;
@@ -49,25 +49,32 @@ const DirectionText = styled.Text`
   margin-bottom: 10px;
 `;
 
-const TextInputWrapper = styled.View`
+export const TextInputWrapper = styled.View`
   margin: 8px 8px 0 8px;
 `;
 
-const ContinentTextInput = styled.TextInput`
+// const ContinentTextInput = styled.TextInput`
+//   padding: 10px 20px;
+//   background-color: white;
+//   border-radius: 9999px;
+//   margin-bottom: 12px;
+// `;
+
+// const CountryTextInput = styled.TextInput`
+//   padding: 10px 20px;
+//   background-color: white;
+//   border-radius: 9999px;
+//   margin-bottom: 12px;
+// `;
+
+export const InputText = styled.TextInput`
   padding: 10px 20px;
   background-color: white;
   border-radius: 9999px;
   margin-bottom: 12px;
 `;
 
-const CountryTextInput = styled.TextInput`
-  padding: 10px 20px;
-  background-color: white;
-  border-radius: 9999px;
-  margin-bottom: 12px;
-`;
-
-const AddTripOpacity = styled.TouchableOpacity`
+export const AddTripOpacity = styled.TouchableOpacity`
   background-color: ${colors.button};
   margin: 24px 8px;
   padding: 12px;
@@ -75,7 +82,7 @@ const AddTripOpacity = styled.TouchableOpacity`
   box-shadow: 1px 2px rgb(0, 0, 0, 0.05);
 `;
 
-const AddTripText = styled.Text`
+export const AddTripText = styled.Text`
   text-align: center;
   color: white;
   font-size: 18px;
@@ -92,7 +99,7 @@ export const AddTripScreen = () => {
     if (place && country) {
       navigation.navigate('Home');
     } else {
-      console.log('Text fields must be filled');
+      console.log('All text fields must be filled');
     }
   };
 
@@ -107,7 +114,15 @@ export const AddTripScreen = () => {
           </ImageWrapper>
           <TextInputWrapper>
             <DirectionText>Wich Place ?</DirectionText>
-            <ContinentTextInput
+
+            <InputText value={place} onChangeText={value => setPlace(value)} />
+            <DirectionText>Which Country ?</DirectionText>
+            <InputText
+              value={country}
+              onChangeText={value => setCountry(value)}
+            />
+
+            {/* <ContinentTextInput
               value={place}
               onChangeText={value => setPlace(value)}
             />
@@ -115,7 +130,7 @@ export const AddTripScreen = () => {
             <CountryTextInput
               value={country}
               onChangeText={value => setCountry(value)}
-            />
+            /> */}
           </TextInputWrapper>
         </AddTripContainer>
 
