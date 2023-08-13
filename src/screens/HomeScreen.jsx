@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../theme';
 import {CardItems} from '../components/CardItems';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {signOut} from 'firebase/auth';
 import {auth, tripsRef} from '../config/firebase';
 import {useSelector} from 'react-redux';
@@ -66,10 +66,23 @@ function HomeScreen() {
 
   const {user} = useSelector(state => state.user);
 
+  const [trips, setTrips] = useState([]);
+
+  const isFocused = useIsFocused();
+
   const fetchTrips = async () => {
     const q = query(tripsRef, where('userId', '==', user.uid));
     const querySnapshot = await getDocs(q);
+    let data = [];
+    querySnapshot.forEach(doc => {
+      data.push({...doc.data(), id: doc.id});
+    });
+    setTrips(data);
   };
+
+  // useEffect(() => {
+  //   fetchTrips();
+  // }, []);
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -97,8 +110,9 @@ function HomeScreen() {
               <Text style={{color: colors.heading}}>Add Trip</Text>
             </TouchableFrame>
           </TripsInfo>
+
           <CardsContainer>
-            <CardItems />
+            <CardItems trips={trips} />
           </CardsContainer>
         </View>
       </ScrollView>

@@ -3,7 +3,7 @@ import React from 'react';
 import {Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../theme';
-import {items} from '../data/items';
+// import {items} from '../data/items';
 import randomImage from '../assets/images/randomImage';
 import {EmptyList} from './EmptyList';
 import {useNavigation} from '@react-navigation/native';
@@ -16,12 +16,12 @@ const CardsContainer = styled.TouchableOpacity`
   box-shadow: 1px 2px rgba(0, 0, 0, 0.05);
 `;
 
-export const CardItems = () => {
+export const CardItems = ({trips}) => {
   const navigation = useNavigation();
 
   return (
     <FlatList
-      data={items}
+      data={trips}
       numColumns={2}
       ListEmptyComponent={<EmptyList />}
       keyExtractor={item => item.id}
