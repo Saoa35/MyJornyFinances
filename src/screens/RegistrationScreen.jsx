@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {ScreenWrapper} from './HomeScreen';
+import Snackbar from 'react-native-snackbar';
 import {
   AddTripContainer,
   AddTripImage,
@@ -15,6 +16,8 @@ import {
 } from './AddTripScreen';
 import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../config/firebase';
 
 function RegistrationScreen() {
   const [email, setEmail] = useState('');
@@ -23,11 +26,16 @@ function RegistrationScreen() {
 
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (email && password && name) {
-      navigation.navigate('Home');
+      // navigation.navigate('Home');
+
+      await createUserWithEmailAndPassword(auth, name, email, password);
     } else {
-      console.log('All text fields must be filled');
+      Snackbar.show({
+        text: 'All text fields must be filled',
+        backgroundColor: 'red',
+      });
     }
   };
 
