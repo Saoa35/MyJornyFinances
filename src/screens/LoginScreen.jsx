@@ -3,7 +3,6 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import {ScreenWrapper} from './HomeScreen';
 import styled from 'styled-components/native';
 import Snackbar from 'react-native-snackbar';
-
 import {
   AddTripContainer,
   AddTripImage,

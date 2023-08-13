@@ -5,7 +5,9 @@ import {colors} from '../theme';
 import {CardItems} from '../components/CardItems';
 import {useNavigation} from '@react-navigation/native';
 import {signOut} from 'firebase/auth';
-import {auth} from '../config/firebase';
+import {auth, tripsRef} from '../config/firebase';
+import {useSelector} from 'react-redux';
+import {getDocs, query, where} from 'firebase/firestore';
 
 export const ScreenWrapper = styled.View`
   width: 100%;
@@ -61,6 +63,13 @@ export const CardsContainer = styled.View`
 
 function HomeScreen() {
   const navigation = useNavigation();
+
+  const {user} = useSelector(state => state.user);
+
+  const fetchTrips = async () => {
+    const q = query(tripsRef, where('userId', '==', user.uid));
+    const querySnapshot = await getDocs(q);
+  };
 
   const handleLogout = async () => {
     await signOut(auth);

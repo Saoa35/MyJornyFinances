@@ -5,6 +5,11 @@ import {ScreenWrapper} from './HomeScreen';
 import {colors} from '../theme';
 import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
+import {Loading} from '../components/Loading';
+import Snackbar from 'react-native-snackbar';
+import {addDoc} from 'firebase/firestore';
+import {tripsRef} from '../config/firebase';
+import {useSelector} from 'react-redux';
 
 export const AddTripWrapper = styled.View`
   justify-content: space-between;
@@ -78,14 +83,30 @@ export const AddTripText = styled.Text`
 export const AddTripScreen = () => {
   const [place, setPlace] = useState('');
   const [country, setCountry] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const {user} = useSelector(state => state.user);
 
   const navigation = useNavigation();
 
-  const handleAddTrip = () => {
+  const handleAddTrip = async () => {
     if (place && country) {
-      navigation.navigate('Home');
+      setLoading(true);
+
+      let doc = await addDoc(tripsRef, {place, country, userId: user.uid});
+
+      setLoading(false);
+
+      if (doc && doc.id) {
+        navigation.navigate('Home');
+      }
     } else {
-      console.log('All text fields must be filled');
+      setLoading(false);
+
+      Snackbar.show({
+        text: 'All text fields must be filled',
+        backgroundColor: 'red',
+      });
     }
   };
 
@@ -111,9 +132,13 @@ export const AddTripScreen = () => {
         </AddTripContainer>
 
         <View>
-          <AddTripOpacity onPress={handleAddTrip}>
-            <AddTripText>Add Trip</AddTripText>
-          </AddTripOpacity>
+          {loading ? (
+            <Loading />
+          ) : (
+            <AddTripOpacity onPress={handleAddTrip}>
+              <AddTripText>Add Trip</AddTripText>
+            </AddTripOpacity>
+          )}
         </View>
       </AddTripWrapper>
     </ScreenWrapper>
