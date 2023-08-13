@@ -1,4 +1,15 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+In this project was implemented firebase autorization and database. Used technologies: React Native, R-Native Navigation, Firebase, React Hooks, Styled Components.
+You can sing up and sing in, add trip name and add current trip expenses.
+
+![myJourneyCosts-Welcome](https://github.com/Saoa35/MyJornyFinances/assets/78507597/8f6444c8-d385-4a7f-aac1-d3ae5de1f3a2)
+![myJourneyCosts-SignIn](https://github.com/Saoa35/MyJornyFinances/assets/78507597/ef722ada-4444-40ce-bceb-2852c9a547d6)
+![myJourneyCosts-Home](https://github.com/Saoa35/MyJornyFinances/assets/78507597/3dcf41aa-c35e-4e0b-8e92-00e7b3121bac)
+![myJourneyCosts-TripCard](https://github.com/Saoa35/MyJornyFinances/assets/78507597/360c5af3-ebc4-4516-aa7d-00b305735f91)
+![myJourneyCosts-AddTrip](https://github.com/Saoa35/MyJornyFinances/assets/78507597/e9625570-8458-44b4-8cbf-c511d5f6135b)
+![myJourneyCosts-CostsCard](https://github.com/Saoa35/MyJornyFinances/assets/78507597/fb52384d-7aa5-4142-9269-5ccdacb492e1)
+![myJourneyCosts-EmptyCard](https://github.com/Saoa35/MyJornyFinances/assets/78507597/a8497cf3-5821-4b50-97df-daab8b126d3a)
+
 
 # Getting Started
 
