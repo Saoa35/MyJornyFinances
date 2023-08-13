@@ -18,6 +18,9 @@ import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../config/firebase';
+import {setUserLoading} from '../redux/slices/userSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../components/Loading';
 
 function RegistrationScreen() {
   const [email, setEmail] = useState('');
@@ -25,11 +28,27 @@ function RegistrationScreen() {
 
   const navigation = useNavigation();
 
+  const {userLoading} = useSelector(state => state.user);
+
+  const dispatch = useDispatch();
+
   const handleSubmit = async () => {
     if (email && password) {
       // navigation.navigate('Home');
+      try {
+        dispatch(setUserLoading(true));
 
-      await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, email, password);
+
+        dispatch(setUserLoading(false));
+      } catch (error) {
+        dispatch(setUserLoading(false));
+
+        Snackbar.show({
+          text: error.message,
+          backgroundColor: 'red',
+        });
+      }
     } else {
       Snackbar.show({
         text: 'All text fields must be filled',
@@ -64,9 +83,13 @@ function RegistrationScreen() {
         </AddTripContainer>
 
         <View>
-          <AddTripOpacity onPress={handleSubmit}>
-            <AddTripText>Sign Up</AddTripText>
-          </AddTripOpacity>
+          {userLoading ? (
+            <Loading />
+          ) : (
+            <AddTripOpacity onPress={handleSubmit}>
+              <AddTripText>Sign Up</AddTripText>
+            </AddTripOpacity>
+          )}
         </View>
       </AddTripWrapper>
     </ScreenWrapper>
