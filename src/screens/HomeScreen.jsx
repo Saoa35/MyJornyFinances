@@ -80,11 +80,11 @@ function HomeScreen() {
     setTrips(data);
   };
 
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     fetchTrips();
-  //   }
-  // }, [isFocused]);
+  useEffect(() => {
+    if (isFocused) {
+      fetchTrips();
+    }
+  }, [isFocused]);
 
   const handleLogout = async () => {
     await signOut(auth);

@@ -20,10 +20,9 @@ function AppNavigation() {
 
   const dispatch = useDispatch();
 
-  // onAuthStateChanged(auth, u => {
-  //   console.log('user:', u);
-  //   dispatch(setUser(u));
-  // });
+  onAuthStateChanged(auth, u => {
+    dispatch(setUser(u));
+  });
 
   return (
     <NavigationContainer>

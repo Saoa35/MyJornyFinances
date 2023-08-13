@@ -58,8 +58,6 @@ export const AddFinanceScreen = props => {
 
   const handleAddFinance = async () => {
     if (title && amount && category) {
-      // navigation.goBack();
-
       setLoading(true);
 
       let doc = await addDoc(financesRef, {

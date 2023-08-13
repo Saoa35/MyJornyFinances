@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {EmptyList} from './EmptyList';
-import {costs} from '../data/costs';
 import styled from 'styled-components/native';
 import {categoryBG, colors} from '../theme';
 
@@ -28,7 +27,6 @@ const CategoryText = styled.Text`
 export const CostsCart = ({finances}) => {
   return (
     <FlatList
-      // data={costs}
       data={finances}
       ListEmptyComponent={<EmptyList />}
       keyExtractor={item => item.id}

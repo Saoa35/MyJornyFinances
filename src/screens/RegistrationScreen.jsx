@@ -15,7 +15,6 @@ import {
   TextInputWrapper,
 } from './AddTripScreen';
 import {BackButton} from '../components/buttons/BackButton';
-import {useNavigation} from '@react-navigation/native';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../config/firebase';
 import {setUserLoading} from '../redux/slices/userSlice';
@@ -26,15 +25,12 @@ function RegistrationScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigation = useNavigation();
-
   const {userLoading} = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
   const handleSubmit = async () => {
     if (email && password) {
-      // navigation.navigate('Home');
       try {
         dispatch(setUserLoading(true));
 

@@ -3,7 +3,6 @@ import React from 'react';
 import {Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../theme';
-import {items} from '../data/items';
 import randomImage from '../assets/images/randomImage';
 import {EmptyList} from './EmptyList';
 import {useNavigation} from '@react-navigation/native';
@@ -21,8 +20,7 @@ export const CardItems = ({trips}) => {
 
   return (
     <FlatList
-      // data={trips}
-      data={items}
+      data={trips}
       numColumns={2}
       ListEmptyComponent={<EmptyList />}
       keyExtractor={item => item.id}

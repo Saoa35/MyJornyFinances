@@ -16,7 +16,6 @@ import {
   TextInputWrapper,
 } from './AddTripScreen';
 import {BackButton} from '../components/buttons/BackButton';
-import {useNavigation} from '@react-navigation/native';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../config/firebase';
 import {useDispatch, useSelector} from 'react-redux';
@@ -36,8 +35,6 @@ function LoginScreen() {
 
   const dispatch = useDispatch();
 
-  const navigation = useNavigation();
-
   const handleSubmit = async () => {
     if (email && password) {
       try {
@@ -54,8 +51,6 @@ function LoginScreen() {
           backgroundColor: 'red',
         });
       }
-
-      // navigation.navigate('Home');
     } else {
       Snackbar.show({
         text: 'All text fields must be filled',

@@ -53,11 +53,11 @@ function TripFinancesScreen(props) {
     setFinances(data);
   };
 
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     fetchFinances();
-  //   }
-  // }, [isFocused]);
+  useEffect(() => {
+    if (isFocused) {
+      fetchFinances();
+    }
+  }, [isFocused]);
 
   return (
     <ScreenWrapper>
