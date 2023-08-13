@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, Image, ScrollView} from 'react-native';
 import {colors} from '../theme';
 import styled from 'styled-components/native';
 
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {
   CardsContainer,
   LogoView,
@@ -15,6 +15,8 @@ import {
 } from './HomeScreen';
 import {BackButton} from '../components/buttons/BackButton';
 import {CostsCart} from '../components/CostsCart';
+import {getDocs, query, where} from 'firebase/firestore';
+import {financesRef} from '../config/firebase';
 
 const TripPlaceTitle = styled.Text`
   color: ${colors.heading};
@@ -35,7 +37,27 @@ const TripCountryTitle = styled.Text`
 function TripFinancesScreen(props) {
   const navigation = useNavigation();
 
+  const [finances, setFinances] = useState([]);
+
   const {id, place, country} = props.route.params;
+
+  const isFocused = useIsFocused();
+
+  const fetchFinances = async () => {
+    const q = query(financesRef, where('tripId', '==', id));
+    const querySnapshot = await getDocs(q);
+    let data = [];
+    querySnapshot.forEach(doc => {
+      data.push({...doc.data(), id: doc.id});
+    });
+    setFinances(data);
+  };
+
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     fetchFinances();
+  //   }
+  // }, [isFocused]);
 
   return (
     <ScreenWrapper>
@@ -56,13 +78,16 @@ function TripFinancesScreen(props) {
         <View style={{paddingHorizontal: 16}}>
           <TripsInfo>
             <Recent>Finances</Recent>
-            <TouchableFrame onPress={() => navigation.navigate('AddFinance')}>
+            <TouchableFrame
+              onPress={() =>
+                navigation.navigate('AddFinance', {id, place, country})
+              }>
               <Text style={{color: colors.heading}}>Add Costs</Text>
             </TouchableFrame>
           </TripsInfo>
 
           <CardsContainer>
-            <CostsCart />
+            <CostsCart finances={finances} />
           </CardsContainer>
         </View>
       </ScrollView>

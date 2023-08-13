@@ -5,6 +5,7 @@ import {ScreenWrapper} from './HomeScreen';
 import {colors} from '../theme';
 import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
+import Snackbar from 'react-native-snackbar';
 import {
   AddTripContainer,
   AddTripImage,
@@ -18,6 +19,9 @@ import {
   TextInputWrapper,
 } from './AddTripScreen';
 import {categories} from '../data/categories';
+import {addDoc} from 'firebase/firestore';
+import {financesRef} from '../config/firebase';
+import {Loading} from '../components/Loading';
 
 const CategoryesContainer = styled.View`
   margin-left: 25px;
@@ -42,18 +46,39 @@ const CategoryType = styled.TouchableOpacity`
   margin: 0 8px 8px 0;
 `;
 
-export const AddFinanceScreen = () => {
+export const AddFinanceScreen = props => {
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  let {id} = props.route.params;
 
   const navigation = useNavigation();
 
-  const handleAddFinance = () => {
+  const handleAddFinance = async () => {
     if (title && amount && category) {
-      navigation.goBack();
+      // navigation.goBack();
+
+      setLoading(true);
+
+      let doc = await addDoc(financesRef, {
+        title,
+        amount,
+        category,
+        tripId: id,
+      });
+
+      setLoading(false);
+
+      if (doc && doc.id) {
+        navigation.navigate.goBack();
+      }
     } else {
-      console.log('All text fields must be filled');
+      Snackbar.show({
+        text: 'All text fields must be filled',
+        backgroundColor: 'red',
+      });
     }
   };
 
@@ -103,9 +128,13 @@ export const AddFinanceScreen = () => {
         </AddTripContainer>
 
         <View>
-          <AddTripOpacity onPress={handleAddFinance}>
-            <AddTripText>Add Costs</AddTripText>
-          </AddTripOpacity>
+          {loading ? (
+            <Loading />
+          ) : (
+            <AddTripOpacity onPress={handleAddFinance}>
+              <AddTripText>Add Costs</AddTripText>
+            </AddTripOpacity>
+          )}
         </View>
       </AddTripWrapper>
     </ScreenWrapper>

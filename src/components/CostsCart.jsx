@@ -25,10 +25,11 @@ const CategoryText = styled.Text`
   line-height: 16px;
 `;
 
-export const CostsCart = () => {
+export const CostsCart = ({finances}) => {
   return (
     <FlatList
-      data={costs}
+      // data={costs}
+      data={finances}
       ListEmptyComponent={<EmptyList />}
       keyExtractor={item => item.id}
       showsVerticalScrollIndicator={false}
