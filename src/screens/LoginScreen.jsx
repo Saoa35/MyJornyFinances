@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {ScreenWrapper} from './HomeScreen';
 import styled from 'styled-components/native';
+import Snackbar from 'react-native-snackbar';
+
 import {
   AddTripContainer,
   AddTripImage,
@@ -16,6 +18,11 @@ import {
 } from './AddTripScreen';
 import {BackButton} from '../components/buttons/BackButton';
 import {useNavigation} from '@react-navigation/native';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../config/firebase';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../components/Loading';
+import {setUserLoading} from '../redux/slices/userSlice';
 
 const ForgetPassContainer = styled.TouchableOpacity`
   justify-content: flex-end;
@@ -26,13 +33,35 @@ function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, sePassword] = useState('');
 
+  const {userLoading} = useSelector(state => state.user);
+
+  const dispatch = useDispatch();
+
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (email && password) {
-      navigation.navigate('Home');
+      try {
+        dispatch(setUserLoading(true));
+
+        await signInWithEmailAndPassword(auth, email, password);
+
+        dispatch(setUserLoading(false));
+      } catch (error) {
+        dispatch(setUserLoading(false));
+
+        Snackbar.show({
+          text: error.message,
+          backgroundColor: 'red',
+        });
+      }
+
+      // navigation.navigate('Home');
     } else {
-      console.log('All text fields must be filled');
+      Snackbar.show({
+        text: 'All text fields must be filled',
+        backgroundColor: 'red',
+      });
     }
   };
 
@@ -65,9 +94,13 @@ function LoginScreen() {
         </AddTripContainer>
 
         <View>
-          <AddTripOpacity onPress={handleSubmit}>
-            <AddTripText>Log In</AddTripText>
-          </AddTripOpacity>
+          {userLoading ? (
+            <Loading />
+          ) : (
+            <AddTripOpacity onPress={handleSubmit}>
+              <AddTripText>Log In</AddTripText>
+            </AddTripOpacity>
+          )}
         </View>
       </AddTripWrapper>
     </ScreenWrapper>

@@ -22,15 +22,14 @@ import {auth} from '../config/firebase';
 function RegistrationScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
 
   const navigation = useNavigation();
 
   const handleSubmit = async () => {
-    if (email && password && name) {
+    if (email && password) {
       // navigation.navigate('Home');
 
-      await createUserWithEmailAndPassword(auth, name, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
     } else {
       Snackbar.show({
         text: 'All text fields must be filled',
@@ -53,8 +52,6 @@ function RegistrationScreen() {
           </ImageWrapper>
 
           <TextInputWrapper>
-            <DirectionText>Name</DirectionText>
-            <InputText value={name} onChangeText={value => setName(value)} />
             <DirectionText>Email</DirectionText>
             <InputText value={email} onChangeText={value => setEmail(value)} />
             <DirectionText>Password</DirectionText>

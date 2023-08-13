@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 import {colors} from '../theme';
 import {CardItems} from '../components/CardItems';
 import {useNavigation} from '@react-navigation/native';
+import {signOut} from 'firebase/auth';
+import {auth} from '../config/firebase';
 
 export const ScreenWrapper = styled.View`
   width: 100%;
@@ -60,11 +62,15 @@ export const CardsContainer = styled.View`
 function HomeScreen() {
   const navigation = useNavigation();
 
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
+
   return (
     <ScreenWrapper>
       <MainContainer>
         <Title>My Jorney Finances</Title>
-        <TouchableFrame onPress={() => navigation.navigate('Welcome')}>
+        <TouchableFrame onPress={handleLogout}>
           <Text style={{color: colors.heading}}>LogOut</Text>
         </TouchableFrame>
       </MainContainer>
