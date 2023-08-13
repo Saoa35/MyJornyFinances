@@ -15,24 +15,33 @@ const Stack = createNativeStackNavigator();
 function AppNavigation() {
   const {user} = useSelector(state => state.user);
 
+  console.log(user);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen
-          options={{presentation: 'modal'}}
-          name="Login"
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          options={{presentation: 'modal'}}
-          name="Register"
-          component={RegistrationScreen}
-        />
-        <Stack.Screen name="AddTrip" component={AddTripScreen} />
-        <Stack.Screen name="AddFinance" component={AddFinanceScreen} />
-        <Stack.Screen name="TripFinances" component={TripFinancesScreen} />
+        {!user ? (
+          <>
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen
+              options={{presentation: 'modal'}}
+              name="Login"
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              options={{presentation: 'modal'}}
+              name="Register"
+              component={RegistrationScreen}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="AddTrip" component={AddTripScreen} />
+            <Stack.Screen name="AddFinance" component={AddFinanceScreen} />
+            <Stack.Screen name="TripFinances" component={TripFinancesScreen} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
